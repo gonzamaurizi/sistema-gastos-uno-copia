@@ -1,4 +1,63 @@
-export const Light ={
+const shared = {
+  carouselColor: "#BF83FF",
+  fontxs: "0.75em",
+  fontsm: "0.875em",
+  fontmd: "1em",
+  font16px: "16px",
+  fontlg: "1.25em",
+  fontxl: "2em",
+  fontxxl: "3em",
+  fontxxxl: "4em",
+  fontButton: "0.875em",
+  navHeight: "5rem",
+  slideroffset: "0.3em",
+  sizeoficon: "1.4em",
+};
+
+export const Light = {
+  ...shared,
+  body: "#F8F5FC",
+  text: "#241C30",
+  bodyRgba: "248, 245, 252",
+  textRgba: "36, 28, 48",
+  whiteBg: "#E9DDFB",
+  bg: "#F8F5FC",
+  bgAlpha: "rgba(255, 255, 255, 0.75)",
+  bg2: "#FFFFFF",
+  bg3: "#F0EAF8",
+  bg4: "#E2D7EF",
+  bg5: "#7E3FD1",
+  bgtotal: "#FFFFFF",
+  bgtgderecha: "#FFFFFF",
+  primary: "#7E3FD1",
+  colorToggle: "#7E3FD1",
+  translateToggle: "-12px",
+  logorotate: "360deg",
+  colorSubtitle: "#71657E",
+};
+
+export const Dark = {
+  ...shared,
+  body: "#0D0B14",
+  text: "#F7F2FF",
+  bodyRgba: "13, 11, 20",
+  textRgba: "247, 242, 255",
+  whiteBg: "#DAC1FF",
+  bg: "#15141B",
+  bgAlpha: "rgba(13, 11, 20, 0.75)",
+  bg2: "#1B1924",
+  bg3: "#15141B",
+  bg4: "#30283B",
+  bg5: "#BF83FF",
+  bgtotal: "#100E17",
+  bgtgderecha: "#15141B",
+  primary: "#BF83FF",
+  colorToggle: "#BF83FF",
+  translateToggle: "26px",
+  logorotate: "-360deg",
+  colorSubtitle: "#B9ACC9",
+};
+/* export const Light ={
     body: "#fff",
     text: "#202020",
     bodyRgba: "255, 255, 255",
@@ -66,4 +125,4 @@ export const Dark = {
     slideroffset:"0.3em",
     sizeoficon:"1.4em",
     colorSubtitle:"#b7b7b7"
-  };
+  }; */

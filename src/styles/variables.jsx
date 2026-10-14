@@ -13,6 +13,7 @@ import { TbBrandSupabase } from "react-icons/tb";
 import { FaReact } from "react-icons/fa";
 import { BsArrowDown, BsArrowUpShort } from "react-icons/bs";
 import { FaBalanceScale } from "react-icons/fa";
+import logo from "../assets/logo.png";
 //import logo from "../assets/logo.svg";
 import { BsGoogle } from "react-icons/bs";
 import { RiCloseLine } from "react-icons/ri";
@@ -49,7 +50,7 @@ export const v = {
   bpbart: `48em`,
   bpmarge: `62em`,
   bphomer: `75em`,
-  colorPrincipal: `#00F34A`,
+  colorPrincipal: `#BF83FF`,
   boxshadowGray: `box-shadow: -2px 14px 20px -4px rgba(0,0,0,0.4);
     -webkit-box-shadow: -2px 14px 20px -4px rgba(0,0,0,0.4);
     -moz-box-shadow: -2px 14px 20px -4px rgba(0,0,0,0.4);`,
@@ -67,7 +68,7 @@ export const v = {
   flechaabajolarga: BsArrowDown,
   flechaarribalarga: BsArrowUpShort,
   balance: FaBalanceScale,
-  //logo: logo,
+  logo: logo,
   iconogoogle: BsGoogle,
   iconocerrar: RiCloseLine,
   iconoguardar: BiSave,
@@ -78,5 +79,5 @@ export const v = {
   iconocalculadora: AiOutlineCalculator,
   iconocheck: BsCalendarCheck,
   //imagenfondo: fondo,
-  colorSecundario: `#DAC1FF`,
+  colorSecundario: `#E9DDFB`,
 };
