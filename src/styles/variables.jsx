@@ -24,6 +24,17 @@ import { SlGraph } from "react-icons/sl";
 import { BsBarChartLine } from "react-icons/bs";
 import { AiOutlineCalculator } from "react-icons/ai";
 import { BsCalendarCheck } from "react-icons/bs";
+import {
+  RiHome4Line,
+  RiExchangeDollarLine,
+  RiPriceTag3Line,
+  RiPieChart2Line,
+  RiMenuLine,
+  RiMenuFoldLine,
+  RiMenuUnfoldLine,
+  RiSunLine,
+  RiMoonLine,
+} from "react-icons/ri";
 //import fondo from "../assets/fondo1.svg";
 export const v = {
   sidebarWidth: `300px`,
@@ -80,4 +91,16 @@ export const v = {
   iconocheck: BsCalendarCheck,
   //imagenfondo: fondo,
   colorSecundario: `#E9DDFB`,
+
+  // Sidebar
+  sidebarWidthCollapsed: `84px`,
+  iconoinicio: RiHome4Line,
+  iconomovimientos: RiExchangeDollarLine,
+  iconocategorias: RiPriceTag3Line,
+  iconoreportes: RiPieChart2Line,
+  iconomenu: RiMenuLine,
+  iconoplegar: RiMenuFoldLine,
+  icondesplegar: RiMenuUnfoldLine,
+  iconosol: RiSunLine,
+  iconoluna: RiMoonLine,
 };
