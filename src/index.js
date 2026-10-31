@@ -15,4 +15,6 @@ export * from './routers/routes';
 export * from './store/AuthStore';
 export * from './styles/themes';
 export * from './styles/variables';
+export * from './supabase/crudUsuarios';
+export * from './supabase/globalSupabase';
 export * from './supabase/supabase.config';
