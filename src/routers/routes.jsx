@@ -1,5 +1,5 @@
 import {Routes,Route,BrowserRouter} from "react-router-dom";
-import {Login,Home, Layout, Proximamente, ProtectedRoute, UserAuth} from "../index"
+import {Login,Home, Configuracion, Layout, Proximamente, ProtectedRoute, UserAuth} from "../index"
 export function MyRoutes() {
     const {user} = UserAuth();
     return (
@@ -13,7 +13,7 @@ export function MyRoutes() {
                     <Route path="/movimientos" element={<Proximamente titulo="Movimientos" />}/>
                     <Route path="/informes" element={<Proximamente titulo="Informes" />}/>
                     <Route path="/dashboard" element={<Proximamente titulo="Dashboard" />}/>
-                    <Route path="/configurar" element={<Proximamente titulo="Configuración" />}/>
+                    <Route path="/configurar" element={<Configuracion />}/>
                     <Route path="/acercade" element={<Proximamente titulo="Acerca de" />}/>
                 </Route>
             </Route>
