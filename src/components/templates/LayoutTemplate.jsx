@@ -92,7 +92,6 @@ const Containerbody = styled.div`
   grid-column: 1;
   width: 100%;
   min-width: 0;
-  padding: ${() => v.lgSpacing};
 
   @media ${Device.tablet} {
     grid-column: 2;

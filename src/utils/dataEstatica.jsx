@@ -1,3 +1,4 @@
+import { v } from "../styles/variables";
 import {
   AiOutlineHome,
   AiOutlineApartment,
@@ -6,6 +7,26 @@ import {
 } from "react-icons/ai";
 import { MdOutlineAnalytics } from "react-icons/md";
 import { RiDashboard3Line } from "react-icons/ri";
+
+// Opciones del menú que se abre al tocar la foto del usuario en la cabecera.
+// "tipo" identifica qué hace cada una (ver DataUser.jsx).
+export const DesplegableUser = [
+  {
+    text: "Mi perfil",
+    icono: v.iconoUser,
+    tipo: "miperfil",
+  },
+  {
+    text: "Configuración",
+    icono: v.iconoSettings,
+    tipo: "configuracion",
+  },
+  {
+    text: "Cerrar sesión",
+    icono: v.iconoCerrarSesion,
+    tipo: "cerrarsesion",
+  },
+];
 
 // Datos del sidebar. Para agregar o quitar una sección del menú
 // alcanza con modificar estas listas (y crear su ruta en routes.jsx).

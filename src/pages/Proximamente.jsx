@@ -14,6 +14,8 @@ export function Proximamente({ titulo }) {
 }
 
 const Container = styled.div`
+  padding: 15px;
+
   h1 {
     margin-bottom: 8px;
   }
