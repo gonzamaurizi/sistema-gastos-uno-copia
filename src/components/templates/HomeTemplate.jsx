@@ -17,7 +17,7 @@ export function HomeTemplate() {
         <h1>Bienvenido {nombre}</h1>
         <p>
           Gastos - UNO te ayuda a organizar tus gastos e ingresos en un solo
-          lugar. Deslizá las tarjetas para conocer cada sección.
+          lugar. Deslizá las tarjetas y tocá una para ir a esa sección.
         </p>
         <div className="botones">
           <Btnsave
