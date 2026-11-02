@@ -2,7 +2,7 @@ import { css } from "styled-components";
 import { CiPalette } from "react-icons/ci";
 import { BsEmojiLaughing } from "react-icons/bs";
 import { RiDeleteBin2Line, RiEditLine } from "react-icons/ri";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { RiVipCrownFill } from "react-icons/ri";
 import { BiUserCircle } from "react-icons/bi";
 import { RiSettings3Line } from "react-icons/ri";
@@ -24,17 +24,7 @@ import { SlGraph } from "react-icons/sl";
 import { BsBarChartLine } from "react-icons/bs";
 import { AiOutlineCalculator } from "react-icons/ai";
 import { BsCalendarCheck } from "react-icons/bs";
-import {
-  RiHome4Line,
-  RiExchangeDollarLine,
-  RiPriceTag3Line,
-  RiPieChart2Line,
-  RiMenuLine,
-  RiMenuFoldLine,
-  RiMenuUnfoldLine,
-  RiSunLine,
-  RiMoonLine,
-} from "react-icons/ri";
+import { RiMenuLine } from "react-icons/ri";
 //import fondo from "../assets/fondo1.svg";
 export const v = {
   sidebarWidth: `300px`,
@@ -93,14 +83,6 @@ export const v = {
   colorSecundario: `#E9DDFB`,
 
   // Sidebar
-  sidebarWidthCollapsed: `84px`,
-  iconoinicio: RiHome4Line,
-  iconomovimientos: RiExchangeDollarLine,
-  iconocategorias: RiPriceTag3Line,
-  iconoreportes: RiPieChart2Line,
+  iconoflechaderecha: IoIosArrowForward,
   iconomenu: RiMenuLine,
-  iconoplegar: RiMenuFoldLine,
-  icondesplegar: RiMenuUnfoldLine,
-  iconosol: RiSunLine,
-  iconoluna: RiMoonLine,
 };
