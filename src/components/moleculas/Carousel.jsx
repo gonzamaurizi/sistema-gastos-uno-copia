@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, EffectCards, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -10,8 +9,7 @@ import { CarouselData } from "../../utils/dataCarousel";
 
 /**
  * Carrusel de tarjetas apiladas (Swiper con efecto "cards").
- * Se desliza con el dedo, el mouse, las flechas o el teclado, y cada
- * tarjeta lleva a su sección al tocarla.
+ * Se desliza con el dedo, el mouse, las flechas o el teclado.
  *  - slides: lista de tarjetas; por defecto usa CarouselData (utils/dataCarousel.jsx)
  */
 export function Carousel({ slides = CarouselData }) {
@@ -30,21 +28,17 @@ export function Carousel({ slides = CarouselData }) {
           lastSlideMessage: "Es la última tarjeta",
         }}
       >
-        {slides.map(({ titulo, descripcion, icono: Ico, colores, to }) => (
+        {slides.map(({ titulo, icono: Ico, colores }) => (
           <SwiperSlide
             key={titulo}
             style={{
               background: `linear-gradient(160deg, ${colores[0]}, ${colores[1]})`,
             }}
           >
-            <Link to={to} className="tarjeta">
-              <span className="icono">
-                <Ico />
-              </span>
-              <h3>{titulo}</h3>
-              <p>{descripcion}</p>
-              <span className="ir">Ir a {titulo} →</span>
-            </Link>
+            <span className="icono">
+              <Ico />
+            </span>
+            <h3>{titulo}</h3>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -66,54 +60,28 @@ const Container = styled.div`
   }
 
   .swiper-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 28px 24px 40px;
     border-radius: 18px;
     color: #ffffff;
     text-align: center;
     user-select: none;
   }
 
-  /* Toda la tarjeta es un link a su sección */
-  .tarjeta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    width: 100%;
-    height: 100%;
-    padding: 28px 24px 40px;
-    border-radius: 18px;
-    color: inherit;
-    text-decoration: none;
-
-    &:focus-visible {
-      outline: 3px solid #ffffff;
-      outline-offset: -6px;
-    }
-  }
-
-  .ir {
-    margin-top: 4px;
-    padding: 6px 14px;
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
-
   .icono {
     display: flex;
-    font-size: 64px;
+    font-size: 80px;
   }
 
   h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-  }
-
-  p {
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .swiper-pagination-fraction {
