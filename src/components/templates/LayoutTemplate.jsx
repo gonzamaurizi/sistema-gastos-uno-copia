@@ -1,122 +1,100 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Outlet, useLocation } from "react-router-dom";
-import { Sidebar } from "../organismos/Sidebar";
+import { Outlet } from "react-router-dom";
+import { Sidebar } from "../organismos/sidebar/Sidebar";
+import { Menuambur } from "../organismos/Menuambur";
+import { Device } from "../../styles/breakpoints";
 import { v } from "../../styles/variables";
 
-const CLAVE_PLEGADO = "sidebarPlegado";
+const CLAVE_ABIERTO = "sidebarAbierto";
 
-function leerPlegado() {
+function leerAbierto() {
   try {
-    return localStorage.getItem(CLAVE_PLEGADO) === "true";
+    return localStorage.getItem(CLAVE_ABIERTO) === "true";
   } catch {
     return false;
   }
 }
 
 /**
- * Estructura de las pantallas privadas: sidebar a la izquierda y,
- * a la derecha, la página que corresponda a la ruta (<Outlet />).
+ * Estructura de las pantallas privadas (después de iniciar sesión):
+ *  - escritorio/tablet: sidebar fijo a la izquierda y la página a la derecha
+ *  - celular: botón de menú arriba y la página debajo
  */
 export function Layout() {
-  const [collapsed, setCollapsed] = useState(leerPlegado);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const { pathname } = useLocation();
+  const [sidebarOpen, setSidebarOpen] = useState(leerAbierto);
 
-  // Recuerda si el usuario dejó el menú contraído.
+  // Recuerda si el usuario dejó el sidebar abierto o cerrado.
   useEffect(() => {
     try {
-      localStorage.setItem(CLAVE_PLEGADO, String(collapsed));
+      localStorage.setItem(CLAVE_ABIERTO, String(sidebarOpen));
     } catch {
       // Si el navegador no permite guardar, simplemente no se recuerda.
     }
-  }, [collapsed]);
-
-  // En celulares, el menú se cierra solo al navegar a otra sección.
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
+  }, [sidebarOpen]);
 
   return (
-    <Shell>
-      <Sidebar
-        collapsed={collapsed}
-        onToggle={() => setCollapsed((c) => !c)}
-        mobileOpen={mobileOpen}
-        onCloseMobile={() => setMobileOpen(false)}
-      />
+    <Container className={sidebarOpen ? "active" : ""}>
+      <div className="ContentSidebar">
+        <Sidebar
+          state={sidebarOpen}
+          setState={() => setSidebarOpen(!sidebarOpen)}
+        />
+      </div>
 
-      <Content>
-        <TopBar>
-          <button
-            type="button"
-            onClick={() => setMobileOpen(true)}
-            aria-label="Abrir menú"
-          >
-            <v.iconomenu />
-          </button>
-          <span>Gastos - UNO</span>
-        </TopBar>
+      <div className="ContentMenuambur">
+        <Menuambur />
+      </div>
 
-        <Main>
-          <Outlet />
-        </Main>
-      </Content>
-    </Shell>
+      <Containerbody>
+        <Outlet />
+      </Containerbody>
+    </Container>
   );
 }
 
-const Shell = styled.div`
-  display: flex;
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
   min-height: 100vh;
-  background: ${(props) => props.theme.bg};
-  color: ${(props) => props.theme.text};
-`;
+  background: ${({ theme }) => theme.bgtotal};
+  color: ${({ theme }) => theme.text};
+  transition: all 0.2s ease-in-out;
 
-const Content = styled.div`
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-`;
+  .ContentSidebar {
+    display: none;
+  }
 
-/* Barra superior: solo se ve en pantallas chicas, para abrir el menú */
-const TopBar = styled.header`
-  display: none;
+  .ContentMenuambur {
+    display: block;
+    padding: ${() => v.smSpacing} ${() => v.mdSpacing};
+    border-bottom: 1px solid ${({ theme }) => theme.bg4};
+  }
 
-  @media (max-width: 48em) {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: ${v.smSpacing} ${v.mdSpacing};
-    background: ${(props) => props.theme.bg2};
-    border-bottom: 1px solid ${(props) => props.theme.bg4};
+  @media ${Device.tablet} {
+    grid-template-columns: 65px 1fr;
 
-    button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border: none;
-      border-radius: ${v.borderRadius};
-      background: transparent;
-      color: ${(props) => props.theme.text};
-      font-size: 1.5em;
-      cursor: pointer;
-
-      &:hover {
-        background: ${(props) => props.theme.bg4};
-      }
+    &.active {
+      grid-template-columns: 220px 1fr;
     }
 
-    span {
-      font-weight: 700;
+    .ContentSidebar {
+      display: initial;
+    }
+
+    .ContentMenuambur {
+      display: none;
     }
   }
 `;
 
-const Main = styled.main`
-  flex: 1;
-  padding: ${v.lgSpacing};
+const Containerbody = styled.div`
+  grid-column: 1;
+  width: 100%;
+  min-width: 0;
+  padding: ${() => v.lgSpacing};
+
+  @media ${Device.tablet} {
+    grid-column: 2;
+  }
 `;

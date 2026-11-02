@@ -34,6 +34,7 @@ export const Light = {
   translateToggle: "-12px",
   logorotate: "360deg",
   colorSubtitle: "#71657E",
+  colorScroll: "#CDBFE0",
 };
 
 export const Dark = {
@@ -56,6 +57,7 @@ export const Dark = {
   translateToggle: "26px",
   logorotate: "-360deg",
   colorSubtitle: "#B9ACC9",
+  colorScroll: "#3A3348",
 };
 /* export const Light ={
     body: "#fff",

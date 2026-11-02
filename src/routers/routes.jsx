@@ -9,10 +9,12 @@ export function MyRoutes() {
             <Route element={<ProtectedRoute user={user} redirectTo="/login" />}>
                 <Route element={<Layout />}>
                     <Route path="/" element={<Home />}/>
-                    <Route path="/movimientos" element={<Proximamente titulo="Movimientos" />}/>
                     <Route path="/categorias" element={<Proximamente titulo="Categorías" />}/>
-                    <Route path="/reportes" element={<Proximamente titulo="Reportes" />}/>
-                    <Route path="/configuracion" element={<Proximamente titulo="Configuración" />}/>
+                    <Route path="/movimientos" element={<Proximamente titulo="Movimientos" />}/>
+                    <Route path="/informes" element={<Proximamente titulo="Informes" />}/>
+                    <Route path="/dashboard" element={<Proximamente titulo="Dashboard" />}/>
+                    <Route path="/configurar" element={<Proximamente titulo="Configuración" />}/>
+                    <Route path="/acercade" element={<Proximamente titulo="Acerca de" />}/>
                 </Route>
             </Route>
         </Routes>
