@@ -1,7 +1,8 @@
+
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Outlet, useLocation } from "react-router-dom";
-import { Sidebar } from "../organismos/Sidebar";
+import { Sidebar } from "../organismos/sidebar/Sidebar";
 import { v } from "../../styles/variables";
 
 const CLAVE_PLEGADO = "sidebarPlegado";
@@ -14,10 +15,6 @@ function leerPlegado() {
   }
 }
 
-/**
- * Estructura de las pantallas privadas: sidebar a la izquierda y,
- * a la derecha, la página que corresponda a la ruta (<Outlet />).
- */
 export function Layout() {
   const [collapsed, setCollapsed] = useState(leerPlegado);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -28,11 +25,11 @@ export function Layout() {
     try {
       localStorage.setItem(CLAVE_PLEGADO, String(collapsed));
     } catch {
-      // Si el navegador no permite guardar, simplemente no se recuerda.
+      // Si el navegador no permite guardar, no se recuerda.
     }
   }, [collapsed]);
 
-  // En celulares, el menú se cierra solo al navegar a otra sección.
+  // Cierra el menú móvil cuando cambia la ruta.
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
@@ -55,6 +52,7 @@ export function Layout() {
           >
             <v.iconomenu />
           </button>
+
           <span>Gastos - UNO</span>
         </TopBar>
 
@@ -80,7 +78,6 @@ const Content = styled.div`
   flex-direction: column;
 `;
 
-/* Barra superior: solo se ve en pantallas chicas, para abrir el menú */
 const TopBar = styled.header`
   display: none;
 

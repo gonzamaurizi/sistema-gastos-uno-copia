@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import { Icono } from "../../index";
+import { v } from "../../index";
 
 export function Btnsave({ funcion, titulo, bgcolor, icono }) {
   return (
     <Container
       type="button"
       onClick={funcion}
-      $bgcolor={bgcolor}
+      $bgcolor={bgcolor || v.colorPrincipal}
     >
-      <Icono>{icono}</Icono>
-      <span className="btn">{titulo}</span>
+      {icono}
+      <span>{titulo}</span>
     </Container>
   );
 }
@@ -18,32 +18,27 @@ const Container = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  text-decoration: none;
-  border: none;
   gap: 10px;
-  background-color: initial;
 
-  .btn {
-    background: ${(props) => props.$bgcolor};
-    padding: 0.6em 1.3em;
-    font-weight: 900;
-    font-size: 18px;
-    border: 3px solid black;
-    border-radius: 0.4em;
-    box-shadow: 0.1em 0.1em #000;
-    transition: 0.2s;
-    white-space: 1px;
-    color: #000;
-    cursor: pointer;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 10px;
 
-    &:hover {
-      transform: translate(-0.05em, -0.05em);
-      box-shadow: 0.15em 0.15em #000;
-    }
+  background: ${(props) => props.$bgcolor};
+  color: #18121f;
 
-    &:active {
-      transform: translate(0.05em, 0.05em);
-      box-shadow: 0.05em 0.05em #000;
-    }
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 `;

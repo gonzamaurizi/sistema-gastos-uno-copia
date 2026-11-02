@@ -1,41 +1,33 @@
-import { useContext } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { ThemeContext } from "../../App";
-import { UserAuth, useAuthStore } from "../../index";
-// `v` se importa directo (y no desde index) porque se usa al definir los estilos,
-// y a través de index todavía podría no estar cargado en ese momento.
-import { v } from "../../styles/variables";
+import { v } from "../../../styles/variables";
+import { LinksArray, SecondarylinksArray } from "../../../utils/dataEstatica";
+import { SidebarCard } from "./SidebarCard";
 
-/**
- * Menú lateral de la aplicación.
- *
- * Props:
- *  - collapsed:      true cuando está en modo angosto (solo íconos), en escritorio
- *  - onToggle:       alterna entre ancho completo y angosto
- *  - mobileOpen:     en pantallas chicas, indica si el menú está desplegado
- *  - onCloseMobile:  cierra el menú en pantallas chicas
- */
 export function Sidebar({ collapsed, onToggle, mobileOpen, onCloseMobile }) {
-  const { user } = UserAuth();
-  const { signOut } = useAuthStore();
-  const { theme, setTheme } = useContext(ThemeContext);
 
-  // Se arma dentro del componente porque `v` se resuelve recién al renderizar.
-  const secciones = [
-    { to: "/", titulo: "Inicio", icono: <v.iconoinicio />, exacto: true },
-    { to: "/movimientos", titulo: "Movimientos", icono: <v.iconomovimientos /> },
-    { to: "/categorias", titulo: "Categorías", icono: <v.iconocategorias /> },
-    { to: "/reportes", titulo: "Reportes", icono: <v.iconoreportes /> },
-    { to: "/configuracion", titulo: "Configuración", icono: <v.iconoSettings /> },
-  ];
-
-  const esOscuro = theme === "dark";
-  const nombre = user?.full_name || user?.name || "Usuario";
+  const renderLinks = (links) =>
+    links.map((item) => (
+      <NavLink
+        key={item.to}
+        to={item.to}
+        end={item.to === "/"}
+        className="link"
+        title={collapsed ? item.label : undefined}
+        onClick={onCloseMobile}
+      >
+        <span className="icono">{item.icon}</span>
+        <span className="texto">{item.label}</span>
+      </NavLink>
+    ));
 
   return (
     <>
-      <Overlay $visible={mobileOpen} onClick={onCloseMobile} aria-hidden="true" />
+      <Overlay
+        $visible={mobileOpen}
+        onClick={onCloseMobile}
+        aria-hidden="true"
+      />
 
       <Container
         $collapsed={collapsed}
@@ -44,6 +36,7 @@ export function Sidebar({ collapsed, onToggle, mobileOpen, onCloseMobile }) {
       >
         <div className="header">
           <img className="logo" src={v.logo} alt="Logo de Gastos - UNO" />
+
           <span className="marca">Gastos - UNO</span>
 
           <button
@@ -67,63 +60,15 @@ export function Sidebar({ collapsed, onToggle, mobileOpen, onCloseMobile }) {
         </div>
 
         <nav className="nav">
-          {secciones.map((s) => (
-            <NavLink
-              key={s.to}
-              to={s.to}
-              end={s.exacto}
-              className="link"
-              title={collapsed ? s.titulo : undefined}
-              onClick={onCloseMobile}
-            >
-              <span className="icono">{s.icono}</span>
-              <span className="texto">{s.titulo}</span>
-            </NavLink>
-          ))}
+          {renderLinks(LinksArray)}
+
+          <div className="separador" />
+
+          {renderLinks(SecondarylinksArray)}
         </nav>
 
-        <div className="pie">
-          <button
-            type="button"
-            className="link accion"
-            onClick={() => setTheme(esOscuro ? "light" : "dark")}
-            title={collapsed ? "Cambiar tema" : undefined}
-          >
-            <span className="icono">
-              {esOscuro ? <v.iconosol /> : <v.iconoluna />}
-            </span>
-            <span className="texto">{esOscuro ? "Tema claro" : "Tema oscuro"}</span>
-          </button>
-
-          <div className="usuario">
-            {user?.picture ? (
-              <img
-                className="avatar"
-                src={user.picture}
-                alt={`Foto de ${nombre}`}
-                referrerPolicy="no-referrer"
-              />
-            ) : (
-              <span className="avatar avatarVacio">
-                <v.iconoUser />
-              </span>
-            )}
-            <span className="nombre" title={nombre}>
-              {nombre}
-            </span>
-          </div>
-
-          <button
-            type="button"
-            className="link accion salir"
-            onClick={signOut}
-            title={collapsed ? "Cerrar sesión" : undefined}
-          >
-            <span className="icono">
-              <v.iconoCerrarSesion />
-            </span>
-            <span className="texto">Cerrar sesión</span>
-          </button>
+        <div className="tarjetaAyuda">
+          {!collapsed && <SidebarCard />}
         </div>
       </Container>
     </>
@@ -214,6 +159,12 @@ const Container = styled.aside`
     gap: 4px;
   }
 
+  .separador {
+    height: 1px;
+    margin: 12px 0;
+    background: ${(props) => props.theme.bg4};
+  }
+
   .link {
     display: flex;
     align-items: center;
@@ -223,7 +174,7 @@ const Container = styled.aside`
     padding: 0 12px;
 
     border: none;
-    border-radius: ${v.borderRadius};
+    border-radius: 10px;
     background: transparent;
     color: ${(props) => props.theme.colorSubtitle};
     font-size: ${(props) => props.theme.fontmd};
@@ -244,7 +195,7 @@ const Container = styled.aside`
     }
 
     &.active {
-      background: ${(props) => props.theme.bg4};
+      background: ${(props) => props.theme.bg5}20;
       color: ${(props) => props.theme.primary};
       font-weight: 600;
       box-shadow: inset 3px 0 0 ${(props) => props.theme.primary};
@@ -257,6 +208,10 @@ const Container = styled.aside`
     justify-content: center;
     flex-shrink: 0;
     font-size: ${(props) => props.theme.sizeoficon};
+  }
+
+  .tarjetaAyuda {
+    margin-top: auto;
   }
 
   .pie {
@@ -303,40 +258,40 @@ const Container = styled.aside`
     font-weight: 600;
   }
 
-  /* Modo angosto (escritorio): solo íconos */
   ${(props) =>
     props.$collapsed &&
     `
-    .marca,
-    .texto,
-    .nombre {
-      display: none;
-    }
+      .marca,
+      .texto,
+      .nombre {
+        display: none;
+      }
 
-    .header {
-      flex-direction: column;
-      justify-content: center;
-      gap: 8px;
-    }
+      .header {
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+      }
 
-    .link {
-      justify-content: center;
-      padding: 0;
-    }
+      .link {
+        justify-content: center;
+        padding: 0;
+      }
 
-    .usuario {
-      justify-content: center;
-    }
-  `}
+      .usuario {
+        justify-content: center;
+      }
+    `}
 
-  /* Pantallas chicas: el menú se vuelve un panel que se desliza desde la izquierda */
   @media (max-width: 48em) {
     position: fixed;
     top: 0;
     left: 0;
     z-index: 100;
     width: min(${v.sidebarWidth}, 85vw);
-    transform: translateX(${(props) => (props.$mobileOpen ? "0" : "-100%")});
+    transform: translateX(
+      ${(props) => (props.$mobileOpen ? "0" : "-100%")}
+    );
     transition: transform 0.25s ease;
 
     .btnPlegar {
@@ -347,7 +302,6 @@ const Container = styled.aside`
       display: flex;
     }
 
-    /* El modo angosto no aplica en celulares: siempre se ve completo */
     .marca,
     .texto,
     .nombre {

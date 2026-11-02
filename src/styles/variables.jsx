@@ -104,3 +104,6 @@ export const v = {
   iconosol: RiSunLine,
   iconoluna: RiMoonLine,
 };
+export const Device = {
+  tablet: `(min-width: ${v.bpbart})`,
+};
